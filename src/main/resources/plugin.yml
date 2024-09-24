@@ -1,0 +1,11 @@
+name: QuestCrafter
+version: ${project.version}
+main: com.jhalff.questCrafter.Main
+api-version: 1.21
+authors: [ jhalff ]
+description: Create custom or generate random quests along with rewards, goes along with a displayable tracker.
+website: https://github.com/jhalff/quest-crafter
+commands:
+  quests:
+    description: Display help menu
+    usage: /<command>
