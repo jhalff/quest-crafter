@@ -8,8 +8,9 @@ import org.bukkit.inventory.ItemStack;
 import static com.jhalff.questCrafter.commands.CompassCommand.generateCompass;
 
 public class JoinListener implements Listener {
+
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(final PlayerJoinEvent e) {
         if (e.getPlayer().hasPlayedBefore()) return;
 
         ItemStack compass = generateCompass();

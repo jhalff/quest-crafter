@@ -11,21 +11,22 @@ public class HelpCommand extends BaseCommand<Main> {
         super(plugin);
     }
 
-    public static void sendHelpMenu(CommandSender sender) {
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', generateHelpMenu()));
-    }
-
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         sendHelpMenu(sender);
         return true;
     }
 
-    private static String generateHelpMenu() {
+    private void sendHelpMenu(final CommandSender sender) {
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', generateHelpMenu()));
+    }
+
+    private String generateHelpMenu() {
         return """
                  \n
                 §e---------- &fQuestCrafter &e- &fCommand List &e----------
                  \n
+                &6/quests menu &7Open quests menu
                 &6/quests help &7Open list of available commands
                 &6/quests compass&7 Spawn an official quests compass
                  \n
