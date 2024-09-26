@@ -7,5 +7,5 @@ description: Create custom or generate random quests along with rewards, goes al
 website: https://github.com/jhalff/quest-crafter
 commands:
   quests:
-    description: Display help menu
+    description: Open quests menu
     usage: /<command>

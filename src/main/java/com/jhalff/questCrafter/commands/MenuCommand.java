@@ -8,12 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-
-import static com.jhalff.questCrafter.Main.*;
+import static com.jhalff.questCrafter.helpers.ConfigHelper.getFromConfig;
+import static com.jhalff.questCrafter.helpers.ConfigHelper.getIntFromConfig;
+import static com.jhalff.questCrafter.helpers.MenuHelper.createGuiItem;
 
 public class MenuCommand extends BaseCommand<Main> implements Listener {
 
@@ -47,18 +45,5 @@ public class MenuCommand extends BaseCommand<Main> implements Listener {
         );
 
         return inv;
-    }
-
-    protected static ItemStack createGuiItem(final Material material, final String name, final String... lore) {
-        final ItemStack item = new ItemStack(material, 1);
-        final ItemMeta meta = item.getItemMeta();
-
-        assert meta != null;
-
-        meta.setDisplayName(name);
-        meta.setLore(Arrays.asList(lore));
-        item.setItemMeta(meta);
-
-        return item;
     }
 }

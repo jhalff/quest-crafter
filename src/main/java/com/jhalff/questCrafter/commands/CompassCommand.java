@@ -7,13 +7,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompassCommand extends BaseCommand<Main> {
+public class CompassCommand extends BaseCommand<Main> implements Listener {
+
+    public static ItemStack compass = generateCompass();
 
     public CompassCommand(Main plugin) {
         super(plugin);
@@ -22,8 +25,6 @@ public class CompassCommand extends BaseCommand<Main> {
     @Override
     public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
         Player player = (Player) sender;
-
-        ItemStack compass = generateCompass();
         player.getInventory().addItem(compass);
 
         return true;
