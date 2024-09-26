@@ -13,6 +13,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
+import static com.jhalff.questCrafter.Main.*;
+
 public class MenuCommand extends BaseCommand<Main> implements Listener {
 
     public static Inventory inv;
@@ -33,8 +35,17 @@ public class MenuCommand extends BaseCommand<Main> implements Listener {
     }
 
     private static Inventory createMainMenuPage() {
-        Inventory inv = Bukkit.createInventory(null, 9, "Quests Menu");
-        inv.addItem(createGuiItem(Material.BOOK, "§6Random Quests", "§7Daily random quests"));
+        Inventory inv = Bukkit.createInventory(
+            null,
+            getIntFromConfig("main-menu-size"),
+            getFromConfig("main-menu-title")
+        );
+
+        inv.setItem(
+            0,
+            createGuiItem(Material.BOOK, "§6Random Quests", "§7Daily random quests")
+        );
+
         return inv;
     }
 
