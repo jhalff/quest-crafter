@@ -20,12 +20,14 @@ import static com.jhalff.questCrafter.helpers.ConfigHelper.setConfig;
 
 public final class Main extends JavaPlugin {
 
+    private BaseCommand<Main> baseCommand = null;
+
     @Override
     public void onEnable() {
         setConfig(this.getConfig());
         saveDefaultConfig();
 
-        BaseCommand<Main> baseCommand = new BaseCommand<>(this) {
+        baseCommand = new BaseCommand<>(this) {
             @Override
             public boolean runCommand(CommandSender sender, Command rootCommand, String label, String[] args) {
                 openMainMenu((HumanEntity) sender);
@@ -34,7 +36,6 @@ public final class Main extends JavaPlugin {
         };
 
         HelpCommand helpCommand = new HelpCommand(this);
-        CompassCommand compassCommand = new CompassCommand(this);
         MenuCommand menuCommand = new MenuCommand(this);
 
         baseCommand.registerSubCommand("help", helpCommand);
@@ -42,15 +43,21 @@ public final class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
-        if (getBoolFromConfig("compass-enabled")) {
+        enableQuests();
+
+        Objects.requireNonNull(getCommand("quests")).setExecutor(baseCommand);
+    }
+
+    private void enableQuests() {
+        if (getBoolFromConfig("compass.enabled")) {
+            CompassCommand compassCommand = new CompassCommand(this);
+
             baseCommand.registerSubCommand("compass", compassCommand);
             getServer().getPluginManager().registerEvents(new PlayerInteractionListener(), this);
 
-            if (getBoolFromConfig("receive-compass-on-join")) {
+            if (getBoolFromConfig("compass.receive-on-first-join")) {
                 getServer().getPluginManager().registerEvents(new JoinListener(), this);
             }
         }
-
-        Objects.requireNonNull(getCommand("quests")).setExecutor(baseCommand);
     }
 }

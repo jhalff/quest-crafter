@@ -10,7 +10,7 @@ public class ConfigHelper {
         config = configFile;
     }
 
-    public static String getFromConfig(String name) {
+    public static String getStringFromConfig(String name) {
         return config.getString(name);
     }
 

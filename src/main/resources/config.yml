@@ -1,12 +1,12 @@
-####################
-# Compass settings #
-####################
-compass-enabled: true
-receive-compass-on-join: true
+compass:
+  enabled: true
+  receive-on-first-join: true
 
+main-menu:
+  title: 'Available Quests'
+  inventory-size: 9
 
-####################
-#  Menu settings   #
-####################
-main-menu-title: 'Available Quests'
-main-menu-size: 9
+quests:
+  random:
+    enabled: true
+    fill-menu: false

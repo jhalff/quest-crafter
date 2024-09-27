@@ -9,8 +9,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 
-import static com.jhalff.questCrafter.helpers.ConfigHelper.getFromConfig;
-import static com.jhalff.questCrafter.helpers.ConfigHelper.getIntFromConfig;
+import static com.jhalff.questCrafter.helpers.ConfigHelper.*;
 import static com.jhalff.questCrafter.helpers.MenuHelper.createGuiItem;
 
 public class MenuCommand extends BaseCommand<Main> implements Listener {
@@ -35,15 +34,25 @@ public class MenuCommand extends BaseCommand<Main> implements Listener {
     private static Inventory createMainMenuPage() {
         Inventory inv = Bukkit.createInventory(
             null,
-            getIntFromConfig("main-menu-size"),
-            getFromConfig("main-menu-title")
+            getIntFromConfig("main-menu.inventory-size"),
+            getStringFromConfig("main-menu.title")
         );
 
-        inv.setItem(
-            0,
-            createGuiItem(Material.BOOK, "§6Random Quests", "§7Daily random quests")
-        );
+        if (getBoolFromConfig("quests.random.enabled")) {
+            loadRandomQuests(inv);
+        }
 
         return inv;
+    }
+
+    private static void loadRandomQuests(Inventory inv) {
+        if (getBoolFromConfig("quests.random.fill-menu")) {
+            for (int i = 0; i < inv.getSize(); i++) {
+                inv.setItem(i, createGuiItem(Material.BOOK, "Example Quest"));
+            }
+        }
+        else {
+            inv.setItem(0, createGuiItem(Material.BOOK, "§6Random Quests", "§7Daily random quests"));
+        }
     }
 }
